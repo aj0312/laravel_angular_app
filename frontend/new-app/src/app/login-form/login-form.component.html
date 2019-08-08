@@ -1,0 +1,42 @@
+<div class="container">
+    <h1>Login Form</h1>
+    <div [hidden]="submitted">
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input [(ngModel)]="model.email" name="email" type="email" class="form-control" id="email" required #email="ngModel">
+          <div [hidden]="email.valid || email.pristine"
+             class="alert alert-danger">
+              Email is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input [(ngModel)]="model.password" name="password" type="password" class="form-control" id="password">
+        </div>
+        <div class="form-group">
+          <input [(ngModel)]="model.remember_me" type="checkbox" name="remember_me" id="remember_me">
+          <label for="remember_me">Remember Me</label>
+        </div>
+        <div class="form-group">
+          <a href="#" (onclick)="register=true">Register</a>
+        </div>
+
+        <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">
+          Submit
+        </button>
+
+      </form>
+    </div>
+    <div [hidden]="!submitted">
+      <h2>You are logged in!</h2>
+      <div class="row">
+        <div class="col-xs-3">Logged in as</div>
+        <div class="col-xs-9"> {{ model.email }}</div>
+      </div>
+      <br>
+      <button class="btn btn-primary" (click)="logOut()">Logout</button>
+    </div>
+    <router-outlet></router-outlet>
+</div>
